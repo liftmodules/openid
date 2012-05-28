@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package net.liftweb {
+package net.liftmodules {
 package openid {
 
 import _root_.org.openid4java.discovery.Identifier;
