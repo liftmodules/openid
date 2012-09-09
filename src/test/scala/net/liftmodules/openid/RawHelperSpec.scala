@@ -22,7 +22,7 @@ import java.util.{List, ArrayList}
 import org.specs.Specification
 
 
-object RawHelperSpec extends Specification {
+class RawHelperSpec extends Specification {
   "RawUtils" should {
     "Convert a java.util.List" in {
       val org: List[Object] = new ArrayList[Object]()
