@@ -19,7 +19,7 @@ package openid
 
 import java.util.{List, ArrayList}
 
-import org.specs.Specification
+import org.specs2.mutable._
 
 
 class RawHelperSpec extends Specification {
