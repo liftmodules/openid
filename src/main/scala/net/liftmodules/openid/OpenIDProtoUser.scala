@@ -70,7 +70,7 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
       
       self.findAll(By(email, u.email.is)) map {existing =>
         info("Cannot register new user, email %s already exists with openId ".format(existing.email.is,existing.openId.is))
-        S.error(duplicateEmailErrorMessage(u.email))
+        S.error(duplicateEmailErrorMessage(u.email.get))
         S.redirectTo(homePage)
       }
       
@@ -134,7 +134,7 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
   <form method="post" action={S.uri}>
     <table>
       <tr>
-        <td colspan="2">{S.??("log.in")}</td>
+        <td colspan="2">{S.?("log.in")}</td>
       </tr>
       <tr>
         <td>OpenID</td><td><user:openid /></td>
@@ -170,7 +170,7 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
         case (Full(id), _) =>
           val user = self.findOrCreate(id.getIdentifier, fo)
           logUserIn(user)
-          S.notice(S.??("Welcome ")+user.niceName)
+          S.notice(S.?("Welcome ")+user.niceName)
 
         case (_, Full(exp)) =>
           warn("Got an exception", exp)
@@ -207,7 +207,7 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
 
     Helpers.bind("user", loginXhtml,
                  "openid" -> (FocusOnLoad(<input type="text" name={openIDVendor.PostParamName}/>)),
-                 "submit" -> (<input type="submit" value={S.??("log.in")}/>))
+                 "submit" -> (<input type="submit" value={S.?("log.in")}/>))
   }
 
   private[openid] def findByNickname(str: String): List[ModelType] = findAll(By(nickname, str))
@@ -256,7 +256,7 @@ trait OpenIDProtoUser[T <: OpenIDProtoUser[T]] extends MegaProtoUser[T] {
     override def validations = validText _ :: validateNickname _ :: super.validations
   }
 
-  override def niceName: String = nickname
+  override def niceName: String = nickname.get
 }
 
 }
