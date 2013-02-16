@@ -4,7 +4,7 @@ organization := "net.liftmodules"
 
 liftVersion <<= liftVersion ?? "2.5-SNAPSHOT"
 
-version <<= liftVersion apply { _ + "-1.1-SNAPSHOT" }
+version <<= liftVersion apply { _ + "-1.2-SNAPSHOT" }
  
 scalaVersion := "2.10.0"
  
@@ -22,7 +22,7 @@ libraryDependencies <++= liftVersion { v =>
 } 
 
 libraryDependencies <++= scalaVersion { sv => 
-  "org.openid4java" % "openid4java-consumer" % "0.9.6" ::
+  "org.openid4java" % "openid4java" % "0.9.7" ::
   (sv match { 
       case "2.9.2" | "2.9.1" | "2.9.1-1" => "org.specs2" %% "specs2" % "1.12.3" % "test"
 	 case "2.10.0" => "org.specs2" %% "specs2" % "1.13" % "test"
