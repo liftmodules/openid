@@ -16,9 +16,11 @@ To include this module in your Lift project, update your `libraryDependencies` i
 Documentation
 =============
 
-**Note:** The module package changed from `net.liftweb.openid` to `net.liftmodules.openid` in May 2012.  Please consider this when referencing documentation written before that date.
+* [Lift Wiki page on OpenID](https://www.assembla.com/wiki/show/liftweb/OpenID)
 
-_Exploring Lift_, chapter 13 discusses [OpenID integration](http://exploring.liftweb.net/master/index-13.html).
+* _Exploring Lift_, chapter 13 discusses [OpenID integration](http://exploring.liftweb.net/master/index-13.html).
+
+**Note:** The module package changed from `net.liftweb.openid` to `net.liftmodules.openid` in May 2012.  Please consider this when referencing documentation written before that date.
 
 
 Notes for module developers
