@@ -68,8 +68,8 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
       
       attrs.get(Email) map {e => u.email(trace("Extracted email",e))}
       
-      self.findAll(By(email, u.email.is)) map {existing =>
-        info("Cannot register new user, email %s already exists with openId ".format(existing.email.is,existing.openId.is))
+      self.findAll(By(email, u.email.get)) map {existing =>
+        info("Cannot register new user, email %s already exists with openId ".format(existing.email.get,existing.openId.get))
         S.error(duplicateEmailErrorMessage(u.email.get))
         S.redirectTo(homePage)
       }
@@ -182,7 +182,7 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
           S.error(unableToLogInErrorMessage(fo))
       }
 
-      val redir = loginRedirect.is match {
+      val redir = loginRedirect.get match {
         case Full(url) =>
           loginRedirect(Empty)
           url
@@ -242,7 +242,7 @@ trait OpenIDProtoUser[T <: OpenIDProtoUser[T]] extends MegaProtoUser[T] {
 
     private def validateNickname(str: String): List[FieldError] = {
       val others = getSingleton.findByNickname(str).
-      filter(_.id.is != fieldOwner.id.is)
+      filter(_.id.get != fieldOwner.id.get)
       others.map(u => FieldError(this, <xml:group>Duplicate nickname: {str}</xml:group>))
     }
 
