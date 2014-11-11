@@ -4,13 +4,13 @@ organization := "net.liftmodules"
 
 version := "1.2-SNAPSHOT"
 
-liftVersion <<= liftVersion ?? "3.0-M2"
+liftVersion <<= liftVersion ?? "2.6-SNAPSHOT"
 
 liftEdition <<= liftVersion apply { _.substring(0,3) }
 
 moduleName <<= (name, liftEdition) { (n, e) =>  n + "_" + e }
 
-scalaVersion := "2.11.2"
+scalaVersion := "2.10.0"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 
