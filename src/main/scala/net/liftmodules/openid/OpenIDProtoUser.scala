@@ -137,10 +137,10 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
         <td colspan="2">{S.?("log.in")}</td>
       </tr>
       <tr>
-        <td>OpenID</td><td><user:openid /></td>
+        <td>OpenID</td><td><span id="user-openid"/></td>
       </tr>
       <tr>
-        <td>&nbsp;</td><td><user:submit /></td>
+        <td>&nbsp;</td><td><span id="user-submit"/></td>
       </tr>
     </table>
   </form>
@@ -205,9 +205,14 @@ trait MetaOpenIDProtoUser[ModelType <: OpenIDProtoUser[ModelType]] extends MetaM
     }
 
 
-    Helpers.bind("user", loginXhtml,
-                 "openid" -> (FocusOnLoad(<input type="text" name={openIDVendor.PostParamName}/>)),
-                 "submit" -> (<input type="submit" value={S.?("log.in")}/>))
+    (
+      "#user-openid" #> JsCmds.FocusOnLoad(<input type="text" name={openIDVendor.PostParamName}/>) &
+       "#user-submit" #>  <input type="submit" value={S.?("log.in")}/>
+      )(loginXhtml)
+
+//    Helpers.bind("user", loginXhtml,
+//                 "openid" -> (FocusOnLoad(<input type="text" name={openIDVendor.PostParamName}/>)),
+//                 "submit" -> (<input type="submit" value={S.?("log.in")}/>))
   }
 
   private[openid] def findByNickname(str: String): List[ModelType] = findAll(By(nickname, str))
